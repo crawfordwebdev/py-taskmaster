@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Task
 
 def home(request):
@@ -14,3 +15,17 @@ def tasks_index(request):
 def tasks_detail(request, task_id):
   task = Task.objects.get(id=task_id)
   return render(request, 'tasks/detail.html', { 'task': task })
+
+
+class TaskCreate(CreateView):
+  model = Task
+  fields = '__all__'
+  success_url = '/tasks/'
+
+class TaskUpdate(UpdateView):
+  model = Task
+  fields = '__all__'
+
+class TaskDelete(DeleteView):
+  model = Task
+  success_url = '/tasks/'
