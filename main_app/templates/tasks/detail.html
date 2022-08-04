@@ -23,6 +23,10 @@ Details
     <h2>Reward: {{ task.reward }}</h2>
     <h2>Penalty: {{ task.penalty }}</h2>
     <p>{{ task.description }}</p>
+    <div class="task-actions">
+      <a href="{% url 'tasks_update' task.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'tasks_delete' task.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 
