@@ -15,7 +15,7 @@ services:
     volumes:
       - .:/code
     ports:
-      - "8042:8042"
+      - "8042:8000"
     environment:
       - POSTGRES_NAME=taskmaster
       - POSTGRES_USER=postgres
