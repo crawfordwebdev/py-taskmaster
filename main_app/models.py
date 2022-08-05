@@ -2,11 +2,11 @@ from django.db import models
 from django.urls import reverse
 
 PRIORITY = (
-  (0, 'None'),
-  (1, 'Low'),
-  (2, 'Medium'),
-  (3, 'High'),
-  (4, 'Emergency')
+  ('0', 'None'),
+  ('1', 'Low'),
+  ('2', 'Medium'),
+  ('3', 'High'),
+  ('4', 'Emergency')
 )
 
 class Task(models.Model):
