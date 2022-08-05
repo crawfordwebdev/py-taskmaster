@@ -20,8 +20,19 @@ Details
   </div>
   <div class="task-details">
     <h1>{{ task.name }}</h1>
-    <h2>Reward: {{ task.reward }}</h2>
-    <h2>Penalty: {{ task.penalty }}</h2>
+    {% if task.reward.all.count %}
+    <h2><span>Rewards:</span> {{ task.reward.all|join:" | " }}</h2>
+    {% else %}
+    <h2>No Rewards Listed</h2>
+    {% endif %}
+
+    {% if task.penalty.all.count %}
+    <h2><span>Penalty:</span> {{ task.penalty.all|join:" | "}}</h2>
+
+    {% else %}
+    <h2>No Penalties Listed</h2>
+    {% endif %}
+    <h2>Priority: </h2>
     <p>{{ task.description }}</p>
     <div class="task-actions">
       <a href="{% url 'tasks_update' task.id %}" class="btn warn">Edit</a>

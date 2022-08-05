@@ -27,8 +27,18 @@ Tasks
           <div class="card-img-container">
           </div>
           <h2 class="card-title">{{ task.name }}</h2>
-          <p>Reward: {{ task.reward }}</p>
-          <p>Penalty: {{ task.penalty }}</p>
+          {% if task.reward.all.count %}
+          <p><span>Rewards:</span> {{ task.reward.all|join:" | " }}</p>
+          {% else %}
+          <p>No Rewards</p>
+          {% endif %}
+
+          {% if task.penalty.all.count %}
+          <p><span>Penalty:</span> {{ task.penalty.all|join:" | "}}</p>
+
+          {% else %}
+          <p>No Penalties</p>
+          {% endif %}
           <p><small>{{ task.description }}</small></p>
         </div>
       </a>
