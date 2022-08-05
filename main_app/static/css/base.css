@@ -14,7 +14,14 @@ html {
 /* resets font size to be 62.5% of the user preference - 
      in most browser configurations this will be 10px */
 :root {
-  font-size: 62.5%
+  font-size: 62.5%;
+
+  --text-font-family: bookmania;
+  --text-font-weight: 400;
+  --text-font-style: normal;
+  --logo-font-family: bd-geminis, sans-serif;
+  --logo-font-weight: 400;
+  --logo-font-style: normal;
 }
 
 body {
@@ -22,18 +29,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+  font-family: var(----text-font-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 
-    'Helvetica Neue', sans-serif;
+    'Helvetica Neue', serif;
+  font-weight: var(--text-font-weight);
+  font-style: var(--text-font-style);
   min-height: 100vh;
-  --nav-bg: rgba(104, 197, 248, .7);
-  --nav-bg-ff: rgba(104, 197, 248, .9);
-  --borders: rgb(36, 116, 248) solid 2px;
+  --nav-bg: rgba(186, 38, 43, .7);
+  --nav-bg-ff: rgba(202, 48, 45, .9);
+  --borders: rgb(129, 0, 32) solid 2px;
   --text-color: rgb(17, 20, 17);
-  --link-hover-color: rgb(16, 56, 158);
+  --link-hover-color: rgb(144, 10, 34);
   --button-bg: rgb(245, 245, 245);
   --button-bg-hover: rgb(226, 226, 226);
-  --submit: rgb(26, 128, 0);
+  --submit: rgb(92, 128, 168);
   --warn: rgb(255, 102, 0);
   --danger: rgb(220, 20, 30);
   --secondary: rgb(57, 57, 57);
@@ -161,7 +170,35 @@ nav li {
   font-size: var(--font-reg);
 }
 
+.logo, a.logo-nav {
+  font-family: var(--logo-font-family);
+  font-weight: var(--logo-font-weight);
+  font-style: var(--logo-font-style);
+}
+
+.logo {
+  font-size: clamp(1.5rem, 5rem, 10rem);
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  white-space: nowrap;
+
+}
+
+a.logo-nav {
+  text-decoration: none;
+  color: black;
+  font-size: var(--font-l);
+}
+
+@media only screen and (min-width: 500px) {
+  a.logo-nav {
+    font-size: var(--font-xxl);
+  }
+}
+
 @media only screen and (min-width: 768px) {
+
   header {
     position: sticky;
     display: flex;
@@ -252,7 +289,7 @@ nav li {
     /* visual fix to help align logo */
     padding-top: 6px;
     width: 256px;
-    height: 35px;
+    height: 55px;
   }
 
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
@@ -263,7 +300,7 @@ nav li {
 
     nav,
     .header-logo-container {
-      background: rgba(104, 197, 248, .6);
+      background: rgba(202, 48, 45, .6);
       -webkit-backdrop-filter: blur(3px);
       backdrop-filter: blur(3px);
     }
