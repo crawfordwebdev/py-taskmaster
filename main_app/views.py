@@ -12,7 +12,9 @@ def about(request):
   return render(request, 'about.html')
 
 def tasks_index(request):
-  tasks = Task.objects.all()
+  tasks = Task.objects.filter(user=request.user)
+  # Can also retrieve the logged in user's tasks like this
+  # tasks = request.user.task_set.all()
   return render(request, 'tasks/index.html', { 'tasks': tasks })
 
 def tasks_detail(request, task_id):
@@ -38,8 +40,6 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'signup.html', context)
   # Same as: return render(request, 'signup.html', {'form': form, 'error_message': error_message})
-
-
 
 class TaskCreate(CreateView):
   model = Task
