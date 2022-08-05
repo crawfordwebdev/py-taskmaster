@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Task
 
 def home(request):
@@ -11,12 +13,14 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def tasks_index(request):
   tasks = Task.objects.filter(user=request.user)
   # Can also retrieve the logged in user's tasks like this
   # tasks = request.user.task_set.all()
   return render(request, 'tasks/index.html', { 'tasks': tasks })
 
+@login_required
 def tasks_detail(request, task_id):
   task = Task.objects.get(id=task_id)
   return render(request, 'tasks/detail.html', { 'task': task })
@@ -41,7 +45,7 @@ def signup(request):
   return render(request, 'signup.html', context)
   # Same as: return render(request, 'signup.html', {'form': form, 'error_message': error_message})
 
-class TaskCreate(CreateView):
+class TaskCreate(LoginRequiredMixin, CreateView):
   model = Task
   fields = '__all__'
   success_url = '/tasks/'
@@ -51,11 +55,11 @@ class TaskCreate(CreateView):
     # Let the CreateView do its job as usual
     return super().form_valid(form)
 
-class TaskUpdate(UpdateView):
+class TaskUpdate(LoginRequiredMixin, UpdateView):
   model = Task
   fields = '__all__'
 
-class TaskDelete(DeleteView):
+class TaskDelete(LoginRequiredMixin, DeleteView):
   model = Task
   success_url = '/tasks/'
 
